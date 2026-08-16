@@ -4,8 +4,8 @@
   "description": "A RESTful Notes API built with Node.js and Express, supporting CRUD operations for creating, reading, updating, and deleting notes.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "src/node app.js",
+    "dev": "src/nodemon app.js"
   },
   "repository": {
     "type": "git",
