@@ -5,11 +5,14 @@ const Note = require("../models/noteModel.js");
 
 const postNote = async (req, res, next) => {
   try {
-    const note = await Note.create(req.body);
-    res.status(201).json({
-      success: true,
-      date: note,
+    const note = new Note({
+      title,
+      content,
+      category,
+      tags,
     });
+    await note.save();
+    res.status(201).json(note);
   } catch (error) {
     next(error);
   }
@@ -17,7 +20,7 @@ const postNote = async (req, res, next) => {
 
 // Get all notes (with pagination, sorting, search & category filtering)
 
-const getNote = async (req, res, next) => {
+const getAllNote = async (req, res, next) => {
   try {
     const { page = 1, limit = 10, sort, search, q, category } = req.query;
     const query = {};
@@ -76,9 +79,9 @@ const getNote = async (req, res, next) => {
 
 // Get single note by ID
 
-const getSingleNote = async (req, res, next) => {
+const getNoteById = async (req, res, next) => {
   try {
-    const note = await Note.findById(req.param.id);
+    const note = await Note.findById(req.params.id);
     if (!note) {
       return res.status(404).json({
         success: false,
